@@ -1,10 +1,6 @@
-- hosts: localhost
-  vars:
-    projectFolder: /Users/rtsypuk/projects/personal/airtraffic/
-    airtrafficApp: airtraffic_app
-    airtrafficMysql: airtraffic_mysql
-    airtrafficELK: airtraffic_elk
-
+---
+- name: Build Docker Images
+  hosts: localhost
   tasks:
   - name: 'Removing old APP images.'
     command: bash -lc  "docker rmi {{airtrafficApp}}"
@@ -33,3 +29,9 @@
 
   - name: 'Running Docker compose.'
     command: bash -lc  "docker-compose -f {{projectFolder}}src/main/docker/app.yml up -d"
+
+  vars:
+    projectFolder: /Users/rtsypuk/projects/personal/airtraffic/
+    airtrafficApp: airtraffic_app
+    airtrafficMysql: airtraffic_mysql
+    airtrafficELK: airtraffic_elk

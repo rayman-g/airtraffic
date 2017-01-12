@@ -1,0 +1,16 @@
+---
+- name: Install Oracle JDK-8
+  hosts: orangepi
+  remote_user: eeeee
+  become: yes
+  roles:
+    - oracle-java
+  vars:
+    java_version: 8
+    java_subversion: 05
+    java_download_from_oracle: true
+    java_set_javahome: true
+
+##################
+# install dump1090
+##################
