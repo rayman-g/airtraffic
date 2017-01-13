@@ -1,0 +1,41 @@
+---
+- name: Build Docker Images
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Building Docker Image for airtraffic_app
+    docker_image:
+      path: "{{projectFolder}}"
+      tag: "{{airtrafficApp}}:latest"
+      name: "{{airtrafficApp}}"
+      force: yes
+
+
+  - name: Building Docker Image for airtraffic_mysql
+    docker_image:
+      path: "{{projectFolder}}src/main/docker/images/mysql"
+      tag: "{{airtrafficMysql}}:latest"
+      name: "{{airtrafficMysql}}"
+      force: yes
+
+  - name: Building Docker Image for airtraffic_elk
+    docker_image:
+      path: "{{projectFolder}}src/main/docker/images/elk"
+      tag: "{{airtrafficELKl}}:latest"
+      name: "{{airtrafficELK}}"
+      force: yes
+
+  - name: Running Docker compose
+    docker_service:
+      project_name: "{{airtrafficApp}}"
+      project_src: "{{projectFolder}}src/main/docker"
+      files: "app.yml"
+      state: "present"
+      restarted: "yes"
+
+  vars:
+    projectFolder: /Users/rtsypuk/projects/personal/airtraffic/
+    airtrafficApp: airtraffic_app
+    airtrafficMysql: airtraffic_mysql
+    airtrafficELK: airtraffic_elk
