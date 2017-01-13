@@ -31,8 +31,8 @@
       project_name: "{{airtrafficApp}}"
       project_src: "{{projectFolder}}src/main/docker"
       files: "app.yml"
-      state: "present"
-      restarted: "yes"
+      state: present
+      restarted: yes
 
   vars:
     projectFolder: /Users/rtsypuk/projects/personal/airtraffic/
